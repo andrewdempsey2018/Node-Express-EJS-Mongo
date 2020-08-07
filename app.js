@@ -3,6 +3,9 @@ const express = require('express');
 //express app
 const app = express();
 
+//make ejs the view engine to be used
+app.set('view engine', 'ejs');
+
 const port = 3000;
 
 //listen for requests
