@@ -5,8 +5,11 @@ const app = express();
 
 const mongoose = require('mongoose');
 
+//add dotenv for reading env variables from the .env file
+require('dotenv').config();
+
 //mongo db connection string
-const dbURI = 'mongodb+srv://andrew2020:GE777GzWIPnIrhYq@andrewcluster-igjjx.mongodb.net/node-tuts?retryWrites=true&w=majority';
+const dbURI = process.env.DB_URI;
 
 /* Connect to the database via mongoose. Returns a promise
 { useNewUrlParser: true, useUnifiedTopology: true } disables a mondlo deprecationWarning */
