@@ -1,39 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index | <%= title %></title>
-</head>
+<%- include('../partials/head.ejs') %>
 
 <body>
 
-    <% const name = 'Ulatek' %>
-    <nav>
-        <div class="site-title">
-            <a href="/">
-                <h1><%= name %> Blog</h1>
-            </a>
-            <p>A sexy Andrew site</p>
-        </div>
-        <ul>
-            <li><a href="/">Blogs</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/blogs/create">Create</a></li>
-        </ul>
-    </nav>
+    <%- include('../partials/nav.ejs') %>
 
     <div class="blogs content">
         <h2>All blogs</h2>
 
         <% if(blogs.length > 0) { %>
-            <% blogs.forEach(blog => { %>
-                <h3 class="title"><%= blog.title %></h3>
-                <p class="snippet"><%= blog.snippet %></p>
-            <% }) %>
+        <% blogs.forEach(blog => { %>
+        <h3 class="title"><%= blog.title %></h3>
+        <p class="snippet"><%= blog.snippet %></p>
+        <% }) %>
         <% } %>
     </div>
+
+    <%- include('../partials/footer.ejs') %>
 </body>
 
 </html>
