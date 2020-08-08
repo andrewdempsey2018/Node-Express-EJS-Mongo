@@ -7,9 +7,13 @@ const mongoose = require('mongoose');
 
 //mongo db connection string
 const dbURI = 'mongodb+srv://andrew2020:GE777GzWIPnIrhYq@andrewcluster-igjjx.mongodb.net/node-tuts?retryWrites=true&w=majority';
-//andrew2020
-//GE777GzWIPnIrhYq
-//node-tuts
+
+/* Connect to the database via mongoose. Returns a promise
+{ useNewUrlParser: true, useUnifiedTopology: true } disables a mondlo deprecationWarning */
+
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((result) => console.log('connected to db'))
+    .catch((err) => console.log(err));
 
 //make ejs the view engine to be used
 app.set('view engine', 'ejs');
