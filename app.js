@@ -12,7 +12,14 @@ const port = 3000;
 app.listen(port);
 
 app.get('/', (req, res) => {
-    res.render('index');
+
+    const blogs = [
+        { title: 'Blog1 title', snippet: 'blog1 snippet snippet1 snippet etc1' },
+        { title: 'Blog2 title', snippet: 'blog2 snippet snippet2 snippet etc2' },
+        { title: 'Blog3 title', snippet: 'blog3 snippet snippet3 snippet etc3' },
+    ];
+
+    res.render('index', { title: 'hello', blogs });
 });
 
 app.get('/about', (req, res) => {

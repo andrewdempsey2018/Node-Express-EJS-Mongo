@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Index | <%= title %></title>
 </head>
 
 <body>
+
+    <% const name = 'Ulatek' %>
     <nav>
         <div class="site-title">
             <a href="/">
-                <h1>Andrews Blog</h1>
+                <h1><%= name %> Blog</h1>
             </a>
             <p>A sexy Andrew site</p>
         </div>
@@ -24,6 +26,13 @@
 
     <div class="blogs content">
         <h2>All blogs</h2>
+
+        <% if(blogs.length > 0) { %>
+            <% blogs.forEach(blog => { %>
+                <h3 class="title"><%= blog.title %></h3>
+                <p class="snippet"><%= blog.snippet %></p>
+            <% }) %>
+        <% } %>
     </div>
 </body>
 
