@@ -11,6 +11,9 @@ const port = 3000;
 //listen for requests
 app.listen(port);
 
+//set a static folder
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
 
     const blogs = [
