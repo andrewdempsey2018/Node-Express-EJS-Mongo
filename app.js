@@ -3,6 +3,14 @@ const express = require('express');
 //express app
 const app = express();
 
+const mongoose = require('mongoose');
+
+//mongo db connection string
+const dbURI = 'mongodb+srv://andrew2020:GE777GzWIPnIrhYq@andrewcluster-igjjx.mongodb.net/node-tuts?retryWrites=true&w=majority';
+//andrew2020
+//GE777GzWIPnIrhYq
+//node-tuts
+
 //make ejs the view engine to be used
 app.set('view engine', 'ejs');
 
@@ -29,7 +37,7 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.get('/blogs/create', (req, res) => {
+app.get('/create', (req, res) => {
     res.render('create');
 });
 
