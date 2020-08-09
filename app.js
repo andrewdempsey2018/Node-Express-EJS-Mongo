@@ -8,6 +8,9 @@ const mongoose = require('mongoose');
 //add dotenv for reading env variables from the .env file
 require('dotenv').config();
 
+//create an instance of the blog model
+const Blog = require('./models/blog');
+
 //mongo db connection string
 const dbURI = process.env.DB_URI;
 
@@ -28,6 +31,26 @@ app.listen(port);
 
 //set a static folder
 app.use(express.static('public'));
+
+//routes, admin add content
+app.get('/add-blog', (req, res) => {
+
+    const blog = new Blog({
+        title: 'wolla wolla',
+        snippet: 'tinkey tonk',
+        body: 'sha la la la la'
+    });
+
+    blog.save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+});
+
+//routes, user navigate website
 
 app.get('/', (req, res) => {
 
