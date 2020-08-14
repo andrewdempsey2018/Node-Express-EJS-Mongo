@@ -15,7 +15,9 @@ const Blog = require('./models/blog');
 const dbURI = process.env.DB_URI;
 
 //for easier parsing of data passed to server
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({
+    extended: true
+}));
 
 /* Connect to the database via mongoose. Returns a promise
 { useNewUrlParser: true, useUnifiedTopology: true } disables a mondlo deprecationWarning */
@@ -44,9 +46,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/blogs', (req, res) => {
-    Blog.find().sort({createdAt: -1})
+    Blog.find().sort({
+            createdAt: -1
+        })
         .then((result) => {
-            res.render('index', {blogs: result});
+            res.render('index', {
+                blogs: result
+            });
         })
         .catch((err) => {
             console.log(err);
@@ -56,7 +62,7 @@ app.get('/blogs', (req, res) => {
 app.post('/blogs', (req, res) => {
 
     blog = new Blog(req.body);
-    
+
     blog.save()
         .then((response) => {
             res.redirect('/blogs');
@@ -65,6 +71,19 @@ app.post('/blogs', (req, res) => {
             console.log(err);
         })
 });
+
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findById(id)
+        .then(result => {
+            res.render('details', {
+                blog: result
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
 
 app.get('/about', (req, res) => {
     res.render('about');
