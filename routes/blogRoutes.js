@@ -5,7 +5,7 @@ const router = express.Router();
 //create an instance of the blog model
 const Blog = require('../models/blog');
 
-router.get('/blogs', (req, res) => {
+router.get('/', (req, res) => {
     Blog.find().sort({
             createdAt: -1
         })
@@ -19,7 +19,7 @@ router.get('/blogs', (req, res) => {
         })
 });
 
-router.post('/blogs', (req, res) => {
+router.post('/', (req, res) => {
 
     blog = new Blog(req.body);
 
@@ -32,11 +32,11 @@ router.post('/blogs', (req, res) => {
         })
 });
 
-router.get('/blogs/create', (req, res) => {
+router.get('/create', (req, res) => {
     res.render('create');
 });
 
-router.get('/blogs/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id;
     Blog.findById(id)
         .then(result => {
@@ -49,7 +49,7 @@ router.get('/blogs/:id', (req, res) => {
         })
 })
 
-router.delete('/blogs/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const id = req.params.id;
 
     Blog.findByIdAndDelete(id)

@@ -49,7 +49,7 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.use(blogRoutes);
+app.use('/blogs', blogRoutes);
 
 app.use((req, res) => {
     res.status(404).render('404');
