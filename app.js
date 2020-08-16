@@ -8,8 +8,8 @@ const mongoose = require('mongoose');
 //add dotenv for reading env variables from the .env file
 require('dotenv').config();
 
-//create an instance of the blog model
-const Blog = require('./models/blog');
+//import routes
+const blogRoutes = require('./routes/blogRoutes');
 
 //mongo db connection string
 const dbURI = process.env.DB_URI;
@@ -45,67 +45,11 @@ app.get('/', (req, res) => {
     res.redirect('/blogs');
 });
 
-app.get('/blogs', (req, res) => {
-    Blog.find().sort({
-            createdAt: -1
-        })
-        .then((result) => {
-            res.render('index', {
-                blogs: result
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-});
-
-app.post('/blogs', (req, res) => {
-
-    blog = new Blog(req.body);
-
-    blog.save()
-        .then((response) => {
-            res.redirect('/blogs');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-});
-
-app.get('/blogs/:id', (req, res) => {
-    const id = req.params.id;
-    Blog.findById(id)
-        .then(result => {
-            res.render('details', {
-                blog: result
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-})
-
 app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.get('/create', (req, res) => {
-    res.render('create');
-});
-
-app.delete('/blogs/:id', (req, res) => {
-    const id = req.params.id;
-
-    Blog.findByIdAndDelete(id)
-        .then(result => {
-            res.json({
-                redirect: '/blogs'
-            })
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-})
+app.use(blogRoutes);
 
 app.use((req, res) => {
     res.status(404).render('404');
